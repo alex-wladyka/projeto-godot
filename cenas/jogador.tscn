@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://otmn4j1medkf"]
+
+[ext_resource type="Texture2D" uid="uid://dx361j2ihdv2x" path="res://Graphics/PNG/playerShip1_red.png" id="1_fn41o"]
+[ext_resource type="Script" path="res://cenas/jogador.gd" id="1_gquke"]
+[ext_resource type="AudioStream" uid="uid://cxy5k5u0nhp7" path="res://Graphics/Bonus/sfx_laser1.ogg" id="3_hyoq5"]
+[ext_resource type="AudioStream" uid="uid://ceef7f2gh1ikr" path="res://Graphics/Bonus/sfx_shieldDown.ogg" id="4_ju2fm"]
+
+[node name="jogador" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_gquke")
+
+[node name="jogador_spr" type="Sprite2D" parent="."]
+texture = ExtResource("1_fn41o")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-9, -37, 7, -37, 11, -12, 35, 3, 40, 0, 45, -6, 48, -6, 46, 18, 46, 23, 44, 24, 42, 22, 36, 22, 20, 26, 14, 27, 8, 37, -7, 37, -14, 28, -37, 22, -40, 23, -43, 24, -45, 25, -46, 20, -49, -2, -50, -6, -45, -6, -42, -2, -37, 1, -35, 1, -12, -12)
+
+[node name="Laser_StartPos" type="Marker2D" parent="."]
+position = Vector2(0, -41)
+
+[node name="Timer_Atirar" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="lasersound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hyoq5")
+
+[node name="dano" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ju2fm")
+
+[connection signal="timeout" from="Timer_Atirar" to="." method="_on_timer_atirar_timeout"]

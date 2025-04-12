@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://bidhyia3jb52x"]
+
+[ext_resource type="Script" path="res://cenas/nivel.gd" id="1_3hdon"]
+[ext_resource type="PackedScene" uid="uid://otmn4j1medkf" path="res://cenas/jogador.tscn" id="1_3i7x3"]
+[ext_resource type="Texture2D" uid="uid://dify74mrcc2e0" path="res://Graphics/Backgrounds/darkPurple.png" id="1_i8cci"]
+[ext_resource type="PackedScene" uid="uid://be4xd3wlwywqr" path="res://cenas/ui.tscn" id="4_ahna3"]
+[ext_resource type="AudioStream" uid="uid://cnjdumficoatl" path="res://Graphics/Bonus/Sci-fi-16-bit-Chiptune-｜-Background-Music-for-Games-｜-Elevators-_Tq_TD_R3ZuY_.mp3" id="6_g1jxf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_po1ga"]
+size = Vector2(120, 2042)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it4gt"]
+size = Vector2(1280, 120)
+
+[node name="nivel" type="Node2D"]
+script = ExtResource("1_3hdon")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(620, 1025)
+scale = Vector2(8.765, 8.765)
+texture = ExtResource("1_i8cci")
+
+[node name="jogador" parent="." instance=ExtResource("1_3i7x3")]
+position = Vector2(540, 1796)
+
+[node name="bordas" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="parede_dir" type="StaticBody2D" parent="bordas"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordas/parede_dir"]
+position = Vector2(1145, 1021)
+shape = SubResource("RectangleShape2D_po1ga")
+
+[node name="parede_esq" type="StaticBody2D" parent="bordas"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordas/parede_esq"]
+position = Vector2(-60, 1010)
+shape = SubResource("RectangleShape2D_po1ga")
+
+[node name="parede_cima" type="StaticBody2D" parent="bordas"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordas/parede_cima"]
+position = Vector2(538, 538)
+shape = SubResource("RectangleShape2D_it4gt")
+
+[node name="parede_baixo" type="StaticBody2D" parent="bordas"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordas/parede_baixo"]
+position = Vector2(549, 1979)
+shape = SubResource("RectangleShape2D_it4gt")
+
+[node name="Timer_meteoro" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Meteoros" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Lasers" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="UI" parent="." instance=ExtResource("4_ahna3")]
+
+[node name="musica fundo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_g1jxf")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="laser" from="jogador" to="." method="_on_jogador_laser"]
+[connection signal="timeout" from="Timer_meteoro" to="." method="_on_timer_meteoro_timeout"]

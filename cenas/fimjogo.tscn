@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqam5ioxq5e18"]
+
+[ext_resource type="Script" path="res://cenas/fimjogo.gd" id="1_rkqik"]
+[ext_resource type="FontFile" uid="uid://bal3ofmc3nlur" path="res://Graphics/Bonus/kenvector_future.ttf" id="1_tukwf"]
+[ext_resource type="AudioStream" uid="uid://wqplhpxjh4e4" path="res://Graphics/Bonus/Sci-fi-16-bit-Chiptune-｜-Background-Music-for-Games-｜-Tekno-Labs-_GqDPKJDlcUU_.mp3" id="3_hv6a3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rkqik")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.227451, 0.180392, 0.247059, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.5
+offset_top = -57.5
+offset_right = 251.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tukwf")
+theme_override_font_sizes/font_size = 66
+text = "FIM DE JOGO"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tukwf")
+theme_override_font_sizes/font_size = 31
+text = "SUA PONTUAÇÃO: "
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="instrucoes_txt" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -409.0
+offset_top = -56.0
+offset_right = 409.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 215
+
+[node name="Label" type="Label" parent="instrucoes_txt"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tukwf")
+theme_override_font_sizes/font_size = 31
+text = "APERTE ESPAÇO PARA INICIAR NOVAMENTE"
+uppercase = true
+
+[node name="musica_fim" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hv6a3")
+volume_db = -5.0
+autoplay = true
+parameters/looping = true
